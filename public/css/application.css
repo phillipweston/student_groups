@@ -1,3 +1,7 @@
+body {
+	/*background-color: beige;*/
+}
+
 .container {
   margin: 20px auto;
   width: 600px;
@@ -9,4 +13,31 @@ th {
 
 form input[type="text"] {
 	display: inline-block;
+}
+
+#group-container {
+	width: 600px;
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+	background-color: #F5FFFA;
+	border: 1px dotted gray;
+	/*border-radius: 10px;*/
+	box-shadow: 5px 5px 3px gray;
+}
+
+#student {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	padding: 20px;
+	text-align: center;
+}
+
+#student img {
+	border-radius: 10px;
+
+}
+
+#group-name {
+	display: block;
 }

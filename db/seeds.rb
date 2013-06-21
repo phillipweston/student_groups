@@ -4,19 +4,20 @@ require_relative '../app/models/group'
 a = Mechanize.new
 a.get('http://socrates.devbootcamp.com/login') do |page|
 	my_page = page.form_with(:action => '/sessions') do |f|
-		f.email  = ENV['SOCRATES_USER']
-		f.password       = ENV['SOCRATES_PASS']
+		f.email  			= ENV['SOCRATES_USER']
+		f.password    = ENV['SOCRATES_PASS']
 	end.click_button
 end
 
-cohorts = [15]
+cohorts = [15,18]
 
 cohort = Cohort.create(name: 'Red Admirals 2013')
+cohort = Cohort.create(name: 'Fence Lizards 2013')
 
-cohorts.each do |cohort_num|
+cohorts.each_with_index do |cohort_num, index|
 	a.get("http://socrates.devbootcamp.com/cohorts/#{cohort_num}") do |cohort_page|
 		cohort_page.images.each do |image|
-			Student.create(name: image.alt, picture_url: image.src, cohort_id: cohort.id)
+			Student.create(name: image.alt, picture_url: image.src, cohort_id: index+1)
 		end
 	end
 end
@@ -26,14 +27,14 @@ week1_groups = [[7,10,1,6], [9,16,17,4], [18,12,19,3], [5,14,8,13], [15,11,2]]
 week2_groups = [[4,17,2,6], [11,8,16,14], [5,10,7,15], [18,3,9,19], [13,12,1]]
 
 week1_groups.each_with_index do |group, index|
-	new_group = Group.create(name: "#Red Admirals 2013 week1_group#{index+1}")
+	new_group = Group.create(name: "Red Admirals 2013 Week 1 Group #{index+1}")
 	group.each do |g|
 		new_group.students << Student.find(g)
 	end
 end
 
 week2_groups.each_with_index do |group, index|
-	new_group = Group.create(name: "#Red Admirals 2013 week2_group#{index+1}")
+	new_group = Group.create(name: "Red Admirals 2013 Week 2 Group #{index+1}")
 	group.each do |g|
 		new_group.students << Student.find(g)
 	end
@@ -59,40 +60,6 @@ end
 # 17 Tej Singh
 # 18 Uzma Rahman
 # 19 William Bendix
-
-
-# Eadon Jacobs
-# Tej Singh
-# Brian Pope
-# Katharine VanderDrift
-
-# Neil Shah
-# Lloyd Taylor
-# Shiv Kumar
-# Phillip Mispagel
-
-# Joshua Miramant
-# Matt Barackman
-# Lillie Chilen
-# Renata Santillan
-
-# Uzma Rahman
-# Bryce Archer
-# Maria Pacana
-# William Bendix
-
-# Paulette Luftig
-# Nicholas Kirchner
-# Avanish Giri
-
-# [“Lillie Chilen”, “Matt Barackman”, “Avanish Giri”, “Katharine VanderDrift”]
-# [“Maria Pacana”, “Shiv Kumar”, “Tej Singh”, “Eadon Jacobs”]
-# [“Uzma Rahman”, “Nicholas Kirchner”, “William Bendix”, “Bryce Archer”]
-# [“Joshua Miramant”, “Phillip Mispagel”, “Lloyd Taylor”, “Paulette Luftig”]
-# [“Renata Santillan”, “Neil Shah”, “Brian Pope”]
-
-# ['Eadon Jacobs', 'Tej Singh', 'Brian Pope', 'Katharine VanderDrift', 'Neil Shah', 'Lloyd Taylor', 'Shiv Kumar', 'Phillip Mispagel', 'Joshua Miramant', 'Matt Barackman', 'Lillie Chilen', 'Renata Santillan', 'Uzma Rahman', 'Bryce Archer', 'Maria Pacana', 'William Bendix', 'Paulette Luftig', 'Nicholas Kirchner', 'Avanish Giri']
-
 
 # 3.times do |i|
 # 	Group.create_groups_for_week(1, i+1)

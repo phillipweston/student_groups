@@ -1,17 +1,20 @@
 <div class="container">
 
+	
 
 	<% @groups.each do |group, students| %>
-	<dl>
-		<dt>
-		<%= group %>
-		</dt>
+	<span id="group-name"><%= group %></span>
+	<div id="group-container">
+			
 
 		<% students.each do |student| %>
-			<dd><%= student %></dd>
+		<div id="student">
+			<img src="<%= student[:picture] %>">
+			<%= student[:name] %>
+		</div>
 		<% end %>
 
-	</dl>
+</div>
 	<% end %>
 
 </div>

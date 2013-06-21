@@ -13,11 +13,13 @@ post '/create' do
 end
 
 get '/cohort/:cohort_id/week/:week_number' do
-
-	@groups = Group.display_students(params[:cohort_id].to_i, params[:week_number].to_i)
-
+	p @groups = Group.display_students(params[:cohort_id].to_i, params[:week_number].to_i)
 	erb :groups
+end
 
+get '/cohort/:cohort_id/week/:week_number/delete' do
+	Group.delete_group(params[:cohort_id].to_i, params[:week_number].to_i)
+	redirect '/'
 end
 
 
