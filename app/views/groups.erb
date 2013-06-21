@@ -1,0 +1,17 @@
+<div class="container">
+
+
+	<% @groups.each do |group, students| %>
+	<dl>
+		<dt>
+		<%= group %>
+		</dt>
+
+		<% students.each do |student| %>
+			<dd><%= student %></dd>
+		<% end %>
+
+	</dl>
+	<% end %>
+
+</div>
