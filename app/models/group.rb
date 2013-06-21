@@ -32,13 +32,15 @@ class Group < ActiveRecord::Base
 
 			3.times do
 
+				break if cohort_students.length == 0
+
 				group.students.each do |current_student|
 					current_student.groups.each do |group|
 						previous_teammates += group.students
 					end
 				end
 
-				if cohort_students.length < 4
+				if cohort_students.length < 2
 					group.students << cohort_students.shift
 					break
 				end

@@ -13,7 +13,7 @@ post '/create' do
 end
 
 get '/cohort/:cohort_id/week/:week_number' do
-	p @groups = Group.display_students(params[:cohort_id].to_i, params[:week_number].to_i)
+	@groups = Group.display_students(params[:cohort_id].to_i, params[:week_number].to_i)
 	erb :groups
 end
 
